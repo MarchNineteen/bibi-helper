@@ -25,9 +25,10 @@ public class ApiList {
     public static String needCoinNew = "https://api.bilibili.com/x/web-interface/coin/today/exp";
 
     /**
-     * 硬币换银瓜子
+     * 银瓜子换硬币
      */
-    public static String silver2coin = "https://api.live.bilibili.com/pay/v1/Exchange/silver2coin";
+//    public static String silver2coin = "https://api.live.bilibili.com/pay/v1/Exchange/silver2coin";
+    public static String silver2coin = "https://api.live.bilibili.com/xlive/revenue/v1/wallet/silver2coin";
 
     /**
      * 查询银瓜子兑换状态

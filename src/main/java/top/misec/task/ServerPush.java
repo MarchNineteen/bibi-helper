@@ -39,7 +39,7 @@ public class ServerPush {
             retryTimes--;
             try {
                 JsonObject jsonObject = HttpUtil.doPost(url, pushBody);
-                if (jsonObject.get("code").getAsInt() == 0 || "success".equals(jsonObject.get("errmsg").getAsString())) {
+                if (jsonObject.get("errno").getAsInt() == 0 || "success".equals(jsonObject.get("errmsg").getAsString())) {
                     log.info("任务状态推送成功");
                     break;
                 } else {

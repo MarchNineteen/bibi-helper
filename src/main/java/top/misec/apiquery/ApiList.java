@@ -18,6 +18,11 @@ public class ApiList {
     public static String reward = "https://api.bilibili.com/x/member/web/exp/reward";
 
     /**
+     * 获取我的信息
+     */
+    public static String getUserInfo = "http://api.bilibili.com/x/member/web/account";
+
+    /**
      * 查询获取已获取的投币经验
      */
     public static String needCoin = "https://www.bilibili.com/plus/account/exp.php";

@@ -34,6 +34,7 @@ public class ChargeMe implements Task {
         int day = cal.get(Calendar.DATE);
         //被充电用户的userID
         String userId = Verify.getInstance().getUserId();
+        String mid = String.valueOf(userInfo.getMid());
         String configChargeUserId = Config.getInstance().getChargeForLove();
 
         //B币券余额
@@ -54,10 +55,10 @@ public class ChargeMe implements Task {
         if (!"0".equals(configChargeUserId)) {
             String userName = oftenAPI.queryUserName(configChargeUserId);
             if ("1".equals(userName)) {
-                userId = Verify.getInstance().getUserId();
+                mid = String.valueOf(userInfo.getMid());
                 log.info("充电对象已置为你本人");
             } else {
-                userId = Config.getInstance().getChargeForLove();
+                mid = Config.getInstance().getChargeForLove();
                 log.info("你配置的充电对象非本人而是: {}", HelpUtil.userNameEncode(userName));
             }
         } else {
@@ -67,7 +68,7 @@ public class ChargeMe implements Task {
         if (userInfo != null) {
             couponBalance = userInfo.getWallet().getCoupon_balance();
         } else {
-            JsonObject queryJson = HttpUtil.doGet(ApiList.chargeQuery + "?mid=" + userId);
+            JsonObject queryJson = HttpUtil.doGet(ApiList.chargeQuery + "?mid=" + mid);
             couponBalance = queryJson.getAsJsonObject("data").getAsJsonObject("bp_wallet").get("coupon_balance").getAsDouble();
         }
 
@@ -78,9 +79,9 @@ public class ChargeMe implements Task {
                 Config.getInstance().isMonthEndAutoCharge()) {
             String requestBody = "bp_num=" + couponBalance
                     + "&is_bp_remains_prior=true"
-                    + "&up_mid=" + userId
+                    + "&up_mid=" + mid
                     + "&otype=up"
-                    + "&oid=" + userId
+                    + "&oid=" + mid
                     + "&csrf=" + Verify.getInstance().getBiliJct();
 
             JsonObject jsonObject = HttpUtil.doPost(ApiList.autoCharge, requestBody);

@@ -25,7 +25,7 @@ public class DailyTask {
             new UserCheck(),
             new VideoWatch(),
             new MangaSign(),
-            new CoinAdd(),
+//            new CoinAdd(),
             new Silver2coin(),
             new LiveCheckin(),
             new GiveGift(),
